@@ -30,10 +30,11 @@ if not TELEGRAM_BOT_TOKEN:
 # =============================================================================
 APPSFLYER_DEV_KEY = os.getenv('APPSFLYER_DEV_KEY', '')
 
-if not APPSFLYER_DEV_KEY:
-    print("❌ Error: APPSFLYER_DEV_KEY not set!")
-    print("   Set it in environment variables or .env file")
-    sys.exit(1)
+# Note: APPSFLYER_DEV_KEY is optional now
+if APPSFLYER_DEV_KEY:
+    print("✅ AppsFlyer key configured")
+else:
+    print("⚠️  AppsFlyer key not set (optional)")
 
 # =============================================================================
 # Proxy Configuration
