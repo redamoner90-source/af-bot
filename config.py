@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Configuration module for AF Bot
-Loads settings from .env file and provides constants
+Loads settings from .env file or environment variables
 """
 
 import os
@@ -9,14 +9,10 @@ import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Load .env file
+# Load .env file if it exists (for local development)
 env_path = Path(__file__).parent / '.env'
-if not env_path.exists():
-    print("❌ Error: .env file not found!")
-    print("   Please copy .env.example to .env and fill in your credentials.")
-    sys.exit(1)
-
-load_dotenv(env_path)
+if env_path.exists():
+    load_dotenv(env_path)
 
 # =============================================================================
 # Telegram Configuration
@@ -25,7 +21,8 @@ TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_ADMIN_ID = os.getenv('TELEGRAM_ADMIN_ID', '')
 
 if not TELEGRAM_BOT_TOKEN:
-    print("❌ Error: TELEGRAM_BOT_TOKEN not set in .env")
+    print("❌ Error: TELEGRAM_BOT_TOKEN not set!")
+    print("   Set it in environment variables or .env file")
     sys.exit(1)
 
 # =============================================================================
@@ -34,7 +31,8 @@ if not TELEGRAM_BOT_TOKEN:
 APPSFLYER_DEV_KEY = os.getenv('APPSFLYER_DEV_KEY', '')
 
 if not APPSFLYER_DEV_KEY:
-    print("❌ Error: APPSFLYER_DEV_KEY not set in .env")
+    print("❌ Error: APPSFLYER_DEV_KEY not set!")
+    print("   Set it in environment variables or .env file")
     sys.exit(1)
 
 # =============================================================================
